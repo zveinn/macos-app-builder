@@ -26,13 +26,13 @@ int main(int argc, char *argv[]) {
     AuthorizationRef authRef = NULL;
     OSStatus status = AuthorizationCreate(NULL, kAuthorizationEmptyEnvironment, kAuthorizationFlagDefaults, &authRef);
     if (status != errAuthorizationSuccess) {
-        // printf("Error creating authorization reference: %d\n", status);
+        printf("Error creating authorization reference: %d\n", status);
         return 1;
     }
 
     status = AuthorizationCopyRights(authRef, &rights, NULL, flags, NULL);
     if (status != errAuthorizationSuccess) {
-        // printf("Error acquiring rights: %d\n", status);
+        printf("Error acquiring rights: %d\n", status);
         AuthorizationFree(authRef, kAuthorizationFlagDestroyRights);
         return 1;
     }
@@ -40,11 +40,11 @@ int main(int argc, char *argv[]) {
     char *arguments[] = { NULL}; 
     status = AuthorizationExecuteWithPrivileges(authRef, fullPath, kAuthorizationFlagDefaults, arguments, NULL);
     if (status != errAuthorizationSuccess) {
-        // printf("Error executing program: %d\n", status);
+        printf("Error executing program: %d\n", status);
         AuthorizationFree(authRef, kAuthorizationFlagDestroyRights);
         return 1;
     }
-    // printf("STATUS %d\n", status);
+    printf("STATUS %d\n", status);
 
     AuthorizationFree(authRef, kAuthorizationFlagDestroyRights);
 
